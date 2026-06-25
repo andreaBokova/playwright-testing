@@ -1,27 +1,23 @@
 import { test, expect } from "../fixtures";
 
 test.describe("Login Tests", () => {
-  
+  test("valid login", async ({ loginPage, page }) => {
+    await loginPage.goto();
 
-    test("valid login", async ({ loginPage, page }) => {
+    await loginPage.login("standard_user", "secret_sauce");
 
-        await loginPage.goto();
+    await expect(page).toHaveURL(/inventory/);
+  });
 
-        await loginPage.login("standard_user", "secret_sauce");
+  test("locked out user login", async ({ loginPage, page }) => {
+    await loginPage.goto();
 
-        await expect(page).toHaveURL(/inventory/);
-    });
+    await loginPage.login("locked_out_user", "secret_sauce");
 
-    test("invalid login", async ({ loginPage, page }) => {
+    await expect(page).not.toHaveURL(/inventory/);
 
-        await loginPage.goto();
+    const errorText = await page.locator('[data-test="error"]').textContent();
 
-        await loginPage.login("invalid_user", "invalid_password");
-
-        await expect(page).not.toHaveURL(/inventory/);
-
-        await expect(page.locator('[data-test="error"]')).toHaveText(
-            /Username and password do not match/,
-        );
-    });
+    expect(errorText).toContain("user has been locked out");
+  });
 });
