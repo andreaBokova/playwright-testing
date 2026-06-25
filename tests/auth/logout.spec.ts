@@ -2,7 +2,7 @@ import { test, expect } from "../fixtures";
 
 test.describe("Logout Tests", () => {
 
-    test("valid logout", async ({ loginPage, inventoryPage, page }) => {
+    test("valid logout", async ({ loginPage, inventoryPage, page, header }) => {
 
         await loginPage.goto();
 
@@ -10,7 +10,7 @@ test.describe("Logout Tests", () => {
 
         await expect(page).toHaveURL(/inventory/);
 
-        await inventoryPage.logout();
+        await header.logout();
 
         await expect(page.locator('#login-button')).toBeVisible();
     });

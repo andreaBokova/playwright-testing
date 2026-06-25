@@ -1,44 +1,41 @@
-import { Page, Locator } from '@playwright/test';
+import { Page, Locator } from "@playwright/test";
 
 export class InventoryPage {
+  readonly filterDropdown: Locator;
 
-    readonly menuButton: Locator;
-    readonly logoutLink: Locator;
-    readonly cartButton: Locator;
+  constructor(private page: Page) {
+    this.filterDropdown = this.page.locator(".product_sort_container");
+  }
 
+  async addToCart(itemName: string) {
+    const product = this.page.locator(".inventory_item").filter({
+      has: this.page.getByText(itemName),
+    });
 
-    constructor(private page: Page) {
-        this.menuButton = page.locator('#react-burger-menu-btn');
-        this.logoutLink = page.locator('#logout_sidebar_link');
-        this.cartButton = page.locator('.shopping_cart_link');
-    }
+    await product.getByRole("button", { name: /add to cart/i }).click();
+  }
 
-    async logout() {
-        await this.menuButton.click();
-        await this.logoutLink.click();
-    }
+  async removeFromCart(itemName: string) {
+    const slug = itemName.toLowerCase().replace(/\s+/g, "-");
 
-    async openCart() {
-        await this.cartButton.click();
-    }
+    await this.page.locator(`[data-test="remove-${slug}"]`).click();
+  }
 
-    async addToCart(itemName: string) {
-        const product = this.page
-            .locator('.inventory_item')
-            .filter({
-                has: this.page.getByText(itemName)
-            });
+  async filterItemsBy(
+    option:
+      | "Name (A to Z)"
+      | "Name (Z to A)"
+      | "Price (low to high)"
+      | "Price (high to low)",
+  ) {
+    await this.filterDropdown.selectOption(option);
+  }
 
-        await product.getByRole('button', { name: /add to cart/i }).click();
-    }
+  async getProductNames(): Promise<string[]> {
+    return await this.page.locator(".inventory_item_name").allTextContents();
+  }
 
-    async removeFromCart(itemName: string) {
-        const slug = itemName.toLowerCase().replace(/\s+/g, '-');
-
-        await this.page
-            .locator(`[data-test="remove-${slug}"]`)
-            .click();
-    }
-
+  async getProductPrices(): Promise<string[]> {
+    return await this.page.locator(".inventory_item_price").allTextContents();
+  }
 }
-

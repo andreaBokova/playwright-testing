@@ -1,7 +1,16 @@
-import { Page, Locator } from "@playwright/test";
+  // continue shopping
+  // checkout
+  // remove item
+import { Page, Locator} from "@playwright/test";
 
 export class CartPage {
-  constructor(private page: Page) {}
+  readonly continueShoppingButton: Locator;
+  readonly checkoutButton: Locator;
+
+  constructor(private page: Page) {
+    this.continueShoppingButton = this.page.locator("#continue-shopping");
+    this.checkoutButton = this.page.locator("#checkout");
+  }
 
   getItem(itemName: string): Locator {
     return this.page.locator(".cart_item").filter({
@@ -9,11 +18,17 @@ export class CartPage {
     });
   }
 
-  async getCartItemCount(): Promise<number> {
-    const text = await this.page
-      .locator('[data-test="shopping-cart-badge"]')
-      .textContent();
-
-    return Number(text);
+  async removeItem(itemName: string) {
+    const slug = itemName.toLowerCase().replace(/\s+/g, "-");
+    await this.page.locator(`[data-test="remove-${slug}"]`).click();
   }
+
+  async continueShopping() {
+    await this.continueShoppingButton.click();
+  }
+
+  async checkout() {
+    await this.checkoutButton.click();
+  }
+
 }
