@@ -12,4 +12,8 @@ export class LoginPage {
     await this.page.locator("#password").fill(password);
     await this.page.locator("#login-button").click();
   }
+
+  async getError() {
+    return this.page.locator('[data-test="error"]');
+  }
 }

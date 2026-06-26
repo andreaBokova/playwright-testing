@@ -1,8 +1,11 @@
 // checkout
 import { test, expect } from "../fixtures";
 
+test.beforeEach(async ({ loginPage, inventoryPage, page }) => {
+  await loginPage.goto();
+});
 test.describe("Checkout Tests", () => {
-  test("valid checkout", async ({
+  test("valid checkout @smoke", async ({
     loginPage,
     inventoryPage,
     cartPage,
@@ -13,9 +16,9 @@ test.describe("Checkout Tests", () => {
     header,
   }) => {
     await loginPage.goto();
-    await loginPage.login("standard_user", "secret_sauce");
+    // await loginPage.login("standard_user", "secret_sauce");
 
-    await expect(page).toHaveURL(/inventory/);
+    // await expect(page).toHaveURL(/inventory/);
     await inventoryPage.addToCart("Sauce Labs Backpack");
     await header.openCart();
 

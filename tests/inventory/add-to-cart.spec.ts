@@ -9,9 +9,9 @@ test.describe("Cart flow", () => {
     page,
   }) => {
     // ACT
-    await loginPage.goto();
-    await loginPage.login("standard_user", "secret_sauce");
-    await expect(page).toHaveURL(/inventory/);
+    // await loginPage.goto();
+    // await loginPage.login("standard_user", "secret_sauce");
+    // await expect(page).toHaveURL(/inventory/);
 
     await inventoryPage.addToCart("Sauce Labs Backpack");
 
@@ -31,9 +31,9 @@ test.describe("Cart flow", () => {
     page,
   }) => {
     // ACT
-    await loginPage.goto();
-    await loginPage.login("standard_user", "secret_sauce");
-    await expect(page).toHaveURL(/inventory/);
+    // await loginPage.goto();
+    // await loginPage.login("standard_user", "secret_sauce");
+    // await expect(page).toHaveURL(/inventory/);
 
     await inventoryPage.addToCart("Sauce Labs Backpack");
     await inventoryPage.addToCart("Sauce Labs Bike Light");

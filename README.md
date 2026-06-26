@@ -59,6 +59,18 @@ Run all tests:
 npx playwright test
 ```
 
+OR
+
+```bash
+npx playwright test --trace on
+```
+
+OR
+
+```bash
+npx playwright test --grep "@smoke"
+```
+
 Run a specific test file:
 
 ```bash
