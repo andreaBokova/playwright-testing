@@ -15,5 +15,6 @@ setup("authenticate standard user", async ({ page }) => {
 
   // 4. SAVE STATE
   await page.context().storageState({ path: authFile });
-  
+
+  console.log(`Authentication state saved to ${authFile}`);
 });

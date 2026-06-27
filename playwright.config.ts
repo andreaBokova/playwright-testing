@@ -1,11 +1,21 @@
 import { defineConfig, devices } from "@playwright/test";
 
+// declare global {
+//   const process: {
+//     env: {
+//       CI?: string;
+//     };
+//   };
+// }
+
+export {};
+
 declare global {
-  const process: {
-    env: {
+  namespace NodeJS {
+    interface ProcessEnv {
       CI?: string;
-    };
-  };
+    }
+  }
 }
 
 /**
@@ -39,7 +49,6 @@ export default defineConfig({
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: "on-first-retry",
     screenshot: "only-on-failure",
-    storageState: "storageState.json",
   },
 
   /* Configure projects for major browsers */
@@ -60,6 +69,7 @@ export default defineConfig({
     //   name: "firefox",
     //   use: {
     //     ...devices["Desktop Firefox"],
+    //     storageState: "playwright/.auth/user.json",
     //   },
     //   dependencies: ["setup"],
     // },
@@ -68,6 +78,7 @@ export default defineConfig({
     //   name: "webkit",
     //   use: {
     //     ...devices["Desktop Safari"],
+    //     storageState: "playwright/.auth/user.json",
     //   },
     //   dependencies: ["setup"],
     // },

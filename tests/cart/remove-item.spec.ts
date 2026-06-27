@@ -1,17 +1,14 @@
-import { test, expect } from "../fixtures.ts";
+import { test, expect } from "../fixtures";
 
 test.describe("Remove Item Tests", () => {
   test("valid remove item", async ({
-    loginPage,
     inventoryPage,
     cartPage,
     page,
     header,
   }) => {
-    await loginPage.goto();
-    await loginPage.login("standard_user", "secret_sauce");
-    await expect(page).toHaveURL(/inventory/);
-
+   
+    await page.goto("https://www.saucedemo.com/inventory.html");
     await inventoryPage.addToCart("Sauce Labs Backpack");
 
     await header.expectItemCount(1);

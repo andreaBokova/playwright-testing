@@ -1,12 +1,8 @@
 // checkout
 import { test, expect } from "../fixtures";
 
-test.beforeEach(async ({ loginPage, inventoryPage, page }) => {
-  await loginPage.goto();
-});
 test.describe("Checkout Tests", () => {
   test("valid checkout @smoke", async ({
-    loginPage,
     inventoryPage,
     cartPage,
     checkoutStepOnePage,
@@ -15,10 +11,13 @@ test.describe("Checkout Tests", () => {
     page,
     header,
   }) => {
-    await loginPage.goto();
+    // login is now handled by auth.setup.ts, so we can skip the login steps here
+    // await loginPage.goto();
     // await loginPage.login("standard_user", "secret_sauce");
-
     // await expect(page).toHaveURL(/inventory/);
+
+    await page.goto("https://www.saucedemo.com/inventory.html");
+
     await inventoryPage.addToCart("Sauce Labs Backpack");
     await header.openCart();
 

@@ -8,16 +8,11 @@ import {
 
 test.describe("Filter items in inventory", () => {
   test("filter items by name (A to Z)", async ({
-    loginPage,
     inventoryPage,
     page,
   }) => {
-    await loginPage.goto();
 
-    await loginPage.login("standard_user", "secret_sauce");
-
-    await expect(page).toHaveURL(/inventory/);
-
+    await page.goto("https://www.saucedemo.com/inventory.html");
     await inventoryPage.filterItemsBy("Name (A to Z)");
 
     const productNames = await inventoryPage.getProductNames();
@@ -26,15 +21,10 @@ test.describe("Filter items in inventory", () => {
     expect(productNames).toEqual(sortStringsAsc(productNames));
   });
   test("filter items by name (Z to A)", async ({
-    loginPage,
     inventoryPage,
     page,
   }) => {
-    await loginPage.goto();
-
-    await loginPage.login("standard_user", "secret_sauce");
-
-    await expect(page).toHaveURL(/inventory/);
+    await page.goto("https://www.saucedemo.com/inventory.html");
 
     await inventoryPage.filterItemsBy("Name (Z to A)");
 
@@ -45,15 +35,10 @@ test.describe("Filter items in inventory", () => {
     expect(productNames).toEqual(sortedProductNamesZtoA);
   });
   test("filter items by price (low to high)", async ({
-    loginPage,
     inventoryPage,
     page,
   }) => {
-    await loginPage.goto();
-
-    await loginPage.login("standard_user", "secret_sauce");
-
-    await expect(page).toHaveURL(/inventory/);
+    await page.goto("https://www.saucedemo.com/inventory.html");
 
     await inventoryPage.filterItemsBy("Price (low to high)");
 
@@ -68,15 +53,10 @@ test.describe("Filter items in inventory", () => {
     expect(displayedFilteredPriceValues).toEqual(sortedProductPricesLowToHigh);
   });
   test("filter items by price (high to low)", async ({
-    loginPage,
     inventoryPage,
     page,
   }) => {
-    await loginPage.goto();
-
-    await loginPage.login("standard_user", "secret_sauce");
-
-    await expect(page).toHaveURL(/inventory/);
+    await page.goto("https://www.saucedemo.com/inventory.html");
 
     await inventoryPage.filterItemsBy("Price (high to low)");
 

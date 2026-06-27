@@ -27,7 +27,9 @@ const loginTests = [
 ];
 
 test.describe("Login tests", () => {
-  test.use({ storageState: undefined });
+  // to not use the storage state from the auth.setup.ts file, 
+  // we can override the storageState for this test suite
+  test.use({ storageState: { cookies: [], origins: [] } });
 
   for (const data of loginTests) {
     test(`login - ${data.name} @login`, async ({ page, loginPage }) => {
