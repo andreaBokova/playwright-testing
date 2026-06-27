@@ -59,6 +59,11 @@ uploads the HTML report
 - Complete checkout process
 - Order confirmation validation
 
+### E2E
+- purchase flow 
+- multi-item purchase flow
+- logout flow
+
 ## Running Tests
 
 Run all tests:
