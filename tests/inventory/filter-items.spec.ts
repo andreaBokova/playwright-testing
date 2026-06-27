@@ -6,7 +6,7 @@ import {
   sortNumbersDesc,
 } from "../helpers";
 
-test.describe("Filter items in inventory", () => {
+test.describe("Filter items in inventory @regression", () => {
   test("filter items by name (A to Z)", async ({
     inventoryPage,
     page,

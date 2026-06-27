@@ -8,6 +8,7 @@ const loginTests = [
     password: "secret_sauce",
     expectSuccess: true,
     error: "",
+    tag: "@smoke"
   },
   {
     name: "locked out user",
@@ -15,6 +16,7 @@ const loginTests = [
     password: "secret_sauce",
     expectSuccess: false,
     error: "Epic sadface: Sorry, this user has been locked out.",
+    tag: "@regression"
   },
   {
     name: "invalid credentials",
@@ -23,6 +25,7 @@ const loginTests = [
     expectSuccess: false,
     error:
       "Epic sadface: Username and password do not match any user in this service",
+    tag: "@regression"
   },
 ];
 
@@ -32,7 +35,7 @@ test.describe("Login tests", () => {
   test.use({ storageState: { cookies: [], origins: [] } });
 
   for (const data of loginTests) {
-    test(`login - ${data.name} @login`, async ({ page, loginPage }) => {
+    test(`login - ${data.name} ${data.tag}`, async ({ page, loginPage }) => {
       await loginPage.goto();
       await loginPage.login(data.username, data.password);
 

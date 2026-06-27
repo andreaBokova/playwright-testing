@@ -1,7 +1,7 @@
 import { test, expect } from "../fixtures";
 
-test.describe("Cart flow", () => {
-  test("add one item to cart", async ({
+test.describe("Add to cart", () => {
+  test("add one item to cart @smoke", async ({
     inventoryPage,
     cartPage,
     header,

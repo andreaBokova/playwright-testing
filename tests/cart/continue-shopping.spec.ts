@@ -1,7 +1,7 @@
 import { test, expect } from "../fixtures";
 
 test.describe("Continue Shopping Tests", () => {
-  test("valid continue shopping", async ({
+  test("valid continue shopping @regression", async ({
     inventoryPage,
     cartPage,
     page,
