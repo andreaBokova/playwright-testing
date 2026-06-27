@@ -19,11 +19,19 @@ https://www.saucedemo.com/
 The project follows common test automation best practices:
 
 - Page Object Model (POM)
-- Reusable page classes
+- Reusable page objects
 - Custom Playwright fixtures
+- Authenticated browser state (storageState)
 - Separation of test logic and page interactions
 - Meaningful test organization by feature
 - Reusable helper methods
+
+## GitHub Actions pipeline:
+
+installs dependencies
+installs Playwright browsers
+runs tests
+uploads the HTML report 
 
 ## Test Coverage
 

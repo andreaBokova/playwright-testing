@@ -1,12 +1,5 @@
 import { defineConfig, devices } from "@playwright/test";
 
-// declare global {
-//   const process: {
-//     env: {
-//       CI?: string;
-//     };
-//   };
-// }
 
 export {};
 
